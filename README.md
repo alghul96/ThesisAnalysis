@@ -5,7 +5,9 @@ Code for the analysis of my bachelor thesis. The analysis regards student career
 - **Carriere.xlsx**: first dataset
 - **Laureati.xls**: second dataset
 - **Analysis.Rproj**: Rstudio Project
-- **datapreparation.R**: Where data are imported and prepared for the Analysis
+- **datapreparation.R**: Where data are imported and prepared for the Analysis. Contents:
+  - Data import
+  - Creation of a sparse binary matrix for Cluster Analysis
 - **hierarchicalclust.R**: Script regarding hierarchical clustering methods. Contents:
   - Computation of the distance matrix
   - Creation of cluster via Divisive Methods
