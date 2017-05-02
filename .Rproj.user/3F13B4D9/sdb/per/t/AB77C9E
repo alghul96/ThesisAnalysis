@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#### Import of laureati.xls ####\nlibrary(readxl)\nlaureati <- read_excel(\"D:/Box Sync/#UNI/Materiale tesi/Analysis/laureati.xls\", sheet = \"Base\")\n\n#### Creation of the analysis dataset ####\n\nclass(laureati[1,1])\n\ndatafcod = data.frame(NULL) # initializing the dataframes\ndatafexam = data.frame(NULL)\n\n\nfor(i in 1:nrow(laureati)){\n  \n  mat = laureati[i, 1]\n  cod = laureati[i, 2]\n  exam = laureati[i, 3]\n    \n  datafcod[mat, cod] = 1\n  datafexam[mat, exam] = 1\n  \n}\n\npar(mfrow = c(1,2))\nimage((as.matrix(datafcod)), col = \"red\") # plotting of the data matrices\nimage((as.matrix(datafexam)), col = \"red\") \n\n# Ordering the dataframe by exam name\ndatafexam_ordered = datafexam[order(colnames(datafexam))]\nimage(as.matrix(datafexam_ordered), xlab = \"Matricole\", ylab = \"Esami\", col = \"red\")\n\n\n##### SECOND IMPORT #####\n\ncarriere <- read_excel(\"D:/Box Sync/#UNI/Materiale tesi/Analysis/carriere.xlsx\", sheet = \"Foglio2\")\n\nfor(i in 1:nrow(laureati)){\n  \n  if (!is.na(carriere$`Data laurea`[i])){ # if the student is graduated\n    \n    mat = carriere[i, 1]\n    cod = carriere[i, 2]\n    \n    datafcod[mat, cod] = 1\n    \n  }\n \n}\n# We see that dimentions do not change, thus the students are the same for both dataframes\n\n\n#### PREPARING DATASET FOR THE ANALYSIS ####\n\ndatafexam_ordered[is.na(datafexam_ordered)] = 0\nimage(as.matrix(datafexam_ordered), xlab = \"Matricole\", ylab = \"Esami\", col = c(\"white\", \"red\"))\n",
+    "created" : 1493460965539.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1617114408",
+    "id" : "AB77C9E",
+    "lastKnownWriteTime" : 1493629228,
+    "last_content_update" : 1493629228930,
+    "path" : "D:/Box Sync/#UNI/Materiale tesi/Analysis/datapreparation.R",
+    "project_path" : "datapreparation.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
