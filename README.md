@@ -1,5 +1,6 @@
 # Analysis for my bachelor thesis in Statistics
 Code for the analysis of my bachelor thesis. The analysis regards student careers from Msc in Informatic Engineering of University of Bologna.
+Supervisor: Professor Claudio Sartori from Department of Computer Science and Engineering of University of Bologna.
 
 ## Contents
 - **Carriere.xlsx**: first dataset
