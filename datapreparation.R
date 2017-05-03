@@ -1,6 +1,6 @@
 #### Import of laureati.xls ####
 library(readxl)
-laureati <- read_excel("D:/Box Sync/#UNI/Materiale tesi/Analysis/laureati.xls", sheet = "Base")
+laureati <- read_excel("D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis/laureati.xls", sheet = "Base")
 
 #### Creation of the analysis dataset ####
 
@@ -32,21 +32,28 @@ image(as.matrix(datafexam_ordered), xlab = "Matricole", ylab = "Esami", col = "r
 
 ##### SECOND IMPORT #####
 
-carriere <- read_excel("D:/Box Sync/#UNI/Materiale tesi/Analysis/carriere.xlsx", sheet = "Foglio2")
+carriere <- read_excel("D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis/carriere.xlsx", sheet = "Foglio2")
 
-for(i in 1:nrow(laureati)){
+for(i in 1:nrow(carriere)){
   
   if (!is.na(carriere$`Data laurea`[i])){ # if the student is graduated
     
     mat = carriere[i, 1]
-    cod = carriere[i, 2]
+    #cod = carriere[i, 2]
+    immyear = carriere[i,5]
     
-    datafcod[mat, cod] = 1
+    datafexam_ordered[mat, "immyear"] = immyear
     
   }
  
 }
 # We see that dimentions do not change, thus the students are the same for both dataframes
+
+
+# Creating a new dataset with same rownames as datafexam_odered for containing other informations
+
+other_info = data.frame(row.names = row.names(datafexam_ordered))
+other_info[,"immyear"] = datafexam_ordered[,"immyear"]
 
 
 #### PREPARING DATASET FOR THE ANALYSIS ####
