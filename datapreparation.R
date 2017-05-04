@@ -1,22 +1,25 @@
 #### Import of laureati.xls ####
 library(readxl)
-laureati <- read_excel("D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis/laureati.xls", sheet = "Base")
+laureati <- read_excel("D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis/laureati.xls", sheet = "Base") # raw data
+laureati <- read_excel("D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis/laureati.xls", sheet = "Mergednames") # clean data
+
 
 #### Creation of the analysis dataset ####
 
 class(laureati[1,1])
 
-datafcod = data.frame(NULL) # initializing the dataframes
-datafexam = data.frame(NULL)
+# initializing the dataframes
+#datafcod = data.frame(NULL) 
+datafexam = data.frame(NULL) # by exam names
 
 
 for(i in 1:nrow(laureati)){
   
   mat = laureati[i, 1]
-  cod = laureati[i, 2]
+  #cod = laureati[i, 2]
   exam = laureati[i, 3]
     
-  datafcod[mat, cod] = 1
+  #datafcod[mat, cod] = 1
   datafexam[mat, exam] = 1
   
 }

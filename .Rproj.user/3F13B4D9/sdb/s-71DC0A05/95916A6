@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1493889260226.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "95916A6",
+    "lastKnownWriteTime" : 5053110620863483938,
+    "last_content_update" : 1493889260226,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "9D5DCF1F",
+        "caption" : "laureati",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=laureati&cache_key=9D5DCF1F",
+        "displayedObservations" : 6932,
+        "environment" : "",
+        "object" : "laureati",
+        "preview" : 0,
+        "totalObservations" : 6932,
+        "variables" : 3
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

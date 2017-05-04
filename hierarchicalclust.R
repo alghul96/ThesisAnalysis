@@ -1,7 +1,9 @@
 library(cluster)
 
-distances = daisy(datafexam_ordered[,-201], 
-                  type = list(asymm = c(1:ncol(datafexam_ordered))), # threating the variables as asymmetric binaries
+clusterdataf = datafexam # select the dataframe to use for clustering
+
+distances = daisy(clusterdataf, 
+                  type = list(asymm = c(1:ncol(clusterdataf))), # threating the variables as asymmetric binaries
                   metric = "gower")
 
 
@@ -18,12 +20,13 @@ ComplClusters = hclust(distances, method = "complete")
 
 mostFollowed = function(k, percentage = 0.6){
   
-  course_freq = apply(datafexam_ordered[k, ], 2, mean)
+  course_freq = apply(clusterdataf[k, ], 2, mean)
   is_popular = (course_freq >= percentage) & (course_freq <= 0.99) # seeing which courses are more frequent
   
   most_followed = course_freq[is_popular] # selection of the courses
   most_followed_ordered = most_followed[order(course_freq[is_popular], decreasing = T)] # ordering
   
+  print(length(k))
   print(most_followed_ordered)
   cat("____________________________________________________________________\n")
 
@@ -53,5 +56,4 @@ dend <- dend %>%
 
 # plot the radial plot
 par(mar = rep(0,4))
-#circlize_dendrogram(dend, dend_track_height = 0.8) 
-circlize_dendrogram(dend, labels_track_height = NA, dend_track_height = .4, labels = FALSE)
+circlize_dendrogram(dend, labels_track_height = NA, dend_track_height = .9, labels = FALSE)
