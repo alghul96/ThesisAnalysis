@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#install.packages(\"mclust\")\nlibrary(mclust)\n\n#finitmixtClusters = Mclust(clusterdataf, G = 5)\n",
+    "created" : 1493893613265.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3643963142",
+    "id" : "14C17FD6",
+    "lastKnownWriteTime" : 1493998618,
+    "last_content_update" : 1493998618870,
+    "path" : "D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis/model-based.R",
+    "project_path" : "model-based.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

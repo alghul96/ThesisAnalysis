@@ -1,5 +1,7 @@
 library(cluster)
 
+#### HIERARCHICAL CLUSTER COMPUTATION ####
+
 clusterdataf = datafexam # select the dataframe to use for clustering
 
 distances = daisy(clusterdataf, 
