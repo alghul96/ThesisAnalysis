@@ -14,3 +14,4 @@ Supervisor: Professor Claudio Sartori from Department of Computer Science and En
   - Creation of cluster via Divisive Methods
   - an Interactive deindogram
 - **kmeans.R**: _Still Empty._ Script regarding k-means clustering methods.
+- **model-based.R**: Script containing Mixture Model Based clustering methods. 
