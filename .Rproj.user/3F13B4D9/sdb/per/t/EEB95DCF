@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "# install.packages(\"flexclust\")\n#library(stats)\nlibrary(flexclust)\nlibrary(cluster)\n\n#### K-MEANS EUCLIDEAN CLUSTERING ####\n\n# Creating the kmeans object\n# kmeansClusters = kmeans(clusterdataf, centers = 5)\nkmeansClusters = cclust(clusterdataf, k = 5)\n\nsummary(kmeansClusters)\n\nkcenters = kmeansClusters@centers \ndaisy(kcenters, metric = \"manhattan\") # distances beetween the cluster centers\n\n# Cluster of each instance\n\n# kgroup = kmeansClusters$cluster\nkgroup = clusters(kmeansClusters)\n\n# Most seen exams in each group\n\nmostFollowed(rownames(clusterdataf)[kgroup == 1]) # Group 1\nmostFollowed(rownames(clusterdataf)[kgroup == 2]) # Group 2\nmostFollowed(rownames(clusterdataf)[kgroup == 3]) # Group 3\nmostFollowed(rownames(clusterdataf)[kgroup == 4]) # Group 4\nmostFollowed(rownames(clusterdataf)[kgroup == 5]) # Group 5\n\nhist(kgroup, breaks = 5)\n\n\n\n#### REPEATIVELY K-MEANS CLUSTERING ####\n\nkmeansClusters_rep = stepFlexclust(clusterdataf, k = 5, nrep = 1000, FUN = cclust, multicore = TRUE) # for five\n\ndaisy(kmeansClusters_rep@centers, metric = \"manhattan\") # seeing the distances\n\n\n### For 3 to 8 clusters \nkmeansClusters_rep = stepFlexclust(clusterdataf, k = 3:8, nrep = 500, FUN = cclust, multicore = TRUE)\n\nkmeansClusters_rep\nkmeansClusters_rep[[5]] # works as a list\n\n# Choosing the number of groups\n\nclusterdistances = daisy(kmeansClusters_rep[[6]]@centers, metric = \"manhattan\")\n\nplot(hclust(clusterdistances, method = \"ward.D\"))\n",
+    "created" : 1493999174160.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "476419662",
+    "id" : "EEB95DCF",
+    "lastKnownWriteTime" : 1494068614,
+    "last_content_update" : 1494068614499,
+    "path" : "D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis/kmeans.R",
+    "project_path" : "kmeans.R",
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

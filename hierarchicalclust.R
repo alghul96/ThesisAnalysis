@@ -1,5 +1,5 @@
 library(cluster)
-
+library(stats)
 #### HIERARCHICAL CLUSTER COMPUTATION ####
 
 clusterdataf = datafexam # select the dataframe to use for clustering
@@ -10,7 +10,7 @@ distances = daisy(clusterdataf,
 
 
 ComplClusters = hclust(distances, method = "complete")
-
+WardClusters = hclust(distances, method = "ward.D") # threating the variables as numeric
 
 #### IDENTIFYING MOST FOLLOWED COURSES IN CLUSTERS ####
 
@@ -35,11 +35,18 @@ mostFollowed = function(k, percentage = 0.6){
 }
 
 
-# Plotting an interactive deindogram to see the courses
+#### Plotting an interactive deindogram to see the courses
+
+# Complete method
 plot(ComplClusters, labels = other_info$immyear)
 identify(ComplClusters, mostFollowed) # click over a branch to see the most followed courses!
 
+# Ward method
+plot(WardClusters, labels = other_info$immyear)
+identify(WardClusters, mostFollowed) # click over a branch to see the most followed courses!
 
+
+hist(cutree(ComplClusters, h = .83))
 
 ### DATA REPRESENTATION ###
 
