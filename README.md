@@ -6,12 +6,15 @@ Supervisor: Professor Claudio Sartori from Department of Computer Science and En
 - **Carriere.xlsx**: first dataset
 - **Laureati.xls**: second dataset
 - **Analysis.Rproj**: Rstudio Project
-- **datapreparation.R**: Where data are imported and prepared for the Analysis. Contents:
+- **datapreparation_v2.R**: Where data are imported and prepared for the Analysis. Contents:
   - Data import
   - Creation of a sparse binary matrix for Cluster Analysis
 - **hierarchicalclust.R**: Script regarding hierarchical clustering methods. Contents:
   - Computation of the distance matrix
   - Creation of cluster via Divisive Methods
-  - an Interactive deindogram
-- **kmeans.R**: _Still Empty._ Script regarding k-means clustering methods.
+  - An Interactive deindogram
+- **kmeans.R**: Script regarding k-means clustering methods.
+  - Computation for k-means for k clusters
+  - Computation for k-means for different cluster dimentions
+  - Methods for choosing the number of clusters
 - **model-based.R**: Script containing Mixture Model Based clustering methods. 

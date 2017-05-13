@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1494690998897.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "C22AE824",
+    "lastKnownWriteTime" : 3419473789575321445,
+    "last_content_update" : 1494690998897,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "9F4CC410",
+        "caption" : "datafexam",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=datafexam&cache_key=9F4CC410",
+        "displayedObservations" : 322,
+        "environment" : "",
+        "object" : "datafexam",
+        "preview" : 0,
+        "totalObservations" : 322,
+        "variables" : 104
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}
