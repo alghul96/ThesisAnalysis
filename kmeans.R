@@ -7,7 +7,8 @@ library(cluster)
 
 # Creating the kmeans object
 # kmeansClusters = kmeans(clusterdataf, centers = 5)
-kmeansClusters = cclust(clusterdataf, k = 5)
+
+kmeansClusters = stepFlexclust(clusterdataf, k = 5, nrep = 1000, FUN = cclust, multicore = TRUE)
 
 summary(kmeansClusters)
 
@@ -22,40 +23,34 @@ kgroup_5 = clusters(kmeansClusters)
 # Most seen exams in each group
 
 mostFollowed(rownames(clusterdataf)[kgroup_5 == 1]) # Group 1
+# kcenters[1,order(kcenters[1,])] # similar result
 mostFollowed(rownames(clusterdataf)[kgroup_5 == 2]) # Group 2
 mostFollowed(rownames(clusterdataf)[kgroup_5 == 3]) # Group 3
 mostFollowed(rownames(clusterdataf)[kgroup_5 == 4]) # Group 4
 mostFollowed(rownames(clusterdataf)[kgroup_5 == 5]) # Group 5
 
-hist(kgroup, breaks = 5)
+
+hist(kgroup_5, breaks = 5)
 
 
 
-#### REPEATIVELY K-MEANS CLUSTERING ####
+#### DIFFERENT K k-MEANS CLUSTERING ####
 
-kmeansClusters_rep = stepFlexclust(clusterdataf, k = 5, nrep = 1000, FUN = cclust, multicore = TRUE) # for five
+### For 2 to 15 clusters 
+kmeansClusters_rep = stepFlexclust(clusterdataf, k = 2:15, nrep = 600, FUN = cclust, multicore = TRUE)
 
-daisy(kmeansClusters_rep@centers, metric = "manhattan") # seeing the distances
 
+# Choosing the number of clusters
 
-### For 3 to 8 clusters 
-kmeansClusters_rep = stepFlexclust(clusterdataf, k = 3:8, nrep = 500, FUN = cclust, multicore = TRUE)
+plot(kmeansClusters_rep)
 
-kmeansClusters_rep
-kmeansClusters_rep[[2]] # works as a list
-
-# Choosing the number of groups
-
-clusterdistances = daisy(kmeansClusters_rep[[6]]@centers, metric = "manhattan")
+clusterdistances = daisy(kmeansClusters_rep[[14]]@centers, metric = "manhattan")
 plot(hclust(clusterdistances, method = "ward.D"))
 
 
-kgroup_4 = kmeansClusters_rep[[2]]@cluster
+kgroup_4 = kmeansClusters_rep[[3]]@cluster
 
 mostFollowed(rownames(clusterdataf)[kgroup_4 == 1]) # Group 1
 mostFollowed(rownames(clusterdataf)[kgroup_4 == 2]) # Group 2
-kmeansClusters_rep[[2]]@centers[2,] # same output
 mostFollowed(rownames(clusterdataf)[kgroup_4 == 3]) # Group 3
 mostFollowed(rownames(clusterdataf)[kgroup_4 == 4]) # Group 4
-
-

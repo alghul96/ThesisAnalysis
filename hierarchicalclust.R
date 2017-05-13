@@ -1,5 +1,6 @@
 library(cluster)
 library(stats)
+
 #### HIERARCHICAL CLUSTER COMPUTATION ####
 
 clusterdataf = datafexam # select the dataframe to use for clustering
@@ -20,16 +21,16 @@ WardClusters = hclust(distances, method = "ward.D") # threating the variables as
 
 # building a function to see most followed exam names given a vector of students
 
-mostFollowed = function(k, percentage = 0.6){
+mostFollowed = function(k, percentage = 0.7){
   
   course_freq = apply(clusterdataf[k, ], 2, mean)
-  is_popular = (course_freq >= percentage) & (course_freq <= 0.99) # seeing which courses are more frequent
+  is_popular = (course_freq >= percentage) & (course_freq <= 1) # seeing which courses are more frequent
   
   most_followed = course_freq[is_popular] # selection of the courses
   most_followed_ordered = most_followed[order(course_freq[is_popular], decreasing = T)] # ordering
   
   print(length(k))
-  print(most_followed_ordered)
+  print(as.data.frame(most_followed_ordered))
   cat("____________________________________________________________________\n")
 
 }
@@ -47,6 +48,9 @@ identify(WardClusters, mostFollowed) # click over a branch to see the most follo
 
 
 hist(cutree(ComplClusters, h = .83))
+
+
+
 
 ### DATA REPRESENTATION ###
 
