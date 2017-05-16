@@ -38,3 +38,8 @@ other_info[,"immyear"] = datafexam_ordered[,"immyear"]
 
 image(as.matrix(datafexam), xlab = "Matricole", ylab = "Esami", col = c("white", "red"))
 image(as.matrix(datafexam_ordered), xlab = "Matricole", ylab = "Esami", col = c("white", "red"))
+
+
+#### FINAL CHECKS ####
+
+datafexam_ordered[(datafexam_ordered == 1 | datafexam_ordered == 0) == FALSE]

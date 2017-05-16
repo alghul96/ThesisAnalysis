@@ -44,8 +44,6 @@ kmeansClusters_rep = stepFlexclust(clusterdataf, k = 2:15, nrep = 600, FUN = ccl
 
 plot(kmeansClusters_rep)
 
-clusterdistances = daisy(kmeansClusters_rep[[14]]@centers, metric = "manhattan")
-plot(hclust(clusterdistances, method = "ward.D"))
 
 
 kgroup_4 = kmeansClusters_rep[[3]]@cluster
