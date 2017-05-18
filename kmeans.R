@@ -8,7 +8,7 @@ library(cluster)
 # Creating the kmeans object
 # kmeansClusters = kmeans(clusterdataf, centers = 5)
 
-kmeansClusters = stepFlexclust(clusterdataf, k = 5, nrep = 1000, FUN = cclust, multicore = TRUE)
+kmeansClusters = stepFlexclust(clusterdataf, k = 4, nrep = 1000, FUN = cclust, multicore = TRUE)
 
 summary(kmeansClusters)
 
@@ -27,8 +27,6 @@ mostFollowed(rownames(clusterdataf)[kgroup_5 == 1]) # Group 1
 mostFollowed(rownames(clusterdataf)[kgroup_5 == 2]) # Group 2
 mostFollowed(rownames(clusterdataf)[kgroup_5 == 3]) # Group 3
 mostFollowed(rownames(clusterdataf)[kgroup_5 == 4]) # Group 4
-mostFollowed(rownames(clusterdataf)[kgroup_5 == 5]) # Group 5
-
 
 hist(kgroup_5, breaks = 5)
 

@@ -8,15 +8,17 @@ distances = daisy(clusterdataf,
 
 kmedoidsClusters = pam(distances, k = 4, diss = TRUE)
 
-kmedoidsClusters = stepFlexclust(x = distances, k = 4, nrep = 1000, FUN = pam, multicore = TRUE)
-
+kgroup_4 = kmedoidsClusters$cluster
 
 
 ##### EVALUATING THE NUMBER OF CLUSTERS #######
 
-pc = pamk(distances, krange=1:14, criterion="asw", diss = TRUE)
+pc = pamk(distances, krange = 1:14, criterion = "asw", diss = TRUE)
 pc
-pc$pamobject$cluster
+
+kgroup_3 = pc$pamobject$cluster
 pc$pamobject$medoids
+
+
 
 cluster.stats(distances, kmedoidsClusters$cluster)

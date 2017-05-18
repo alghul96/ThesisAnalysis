@@ -1,14 +1,14 @@
 {
     "collab_server" : "",
-    "contents" : "# install.packages(\"flexclust\")\n#library(stats)\nlibrary(flexclust)\nlibrary(cluster)\n\n#### K-MEANS EUCLIDEAN CLUSTERING ####\n\n# Creating the kmeans object\n# kmeansClusters = kmeans(clusterdataf, centers = 5)\n\nkmeansClusters = stepFlexclust(clusterdataf, k = 5, nrep = 1000, FUN = cclust, multicore = TRUE)\n\nsummary(kmeansClusters)\n\nkcenters = kmeansClusters@centers \ndaisy(kcenters, metric = \"manhattan\") # distances beetween the cluster centers\n\n# Cluster of each instance\n\n# kgroup = kmeansClusters$cluster\nkgroup_5 = clusters(kmeansClusters)\n\n# Most seen exams in each group\n\nmostFollowed(rownames(clusterdataf)[kgroup_5 == 1]) # Group 1\n# kcenters[1,order(kcenters[1,])] # similar result\nmostFollowed(rownames(clusterdataf)[kgroup_5 == 2]) # Group 2\nmostFollowed(rownames(clusterdataf)[kgroup_5 == 3]) # Group 3\nmostFollowed(rownames(clusterdataf)[kgroup_5 == 4]) # Group 4\nmostFollowed(rownames(clusterdataf)[kgroup_5 == 5]) # Group 5\n\n\nhist(kgroup_5, breaks = 5)\n\n\n\n#### DIFFERENT K k-MEANS CLUSTERING ####\n\n### For 2 to 15 clusters \nkmeansClusters_rep = stepFlexclust(clusterdataf, k = 2:15, nrep = 600, FUN = cclust, multicore = TRUE)\n\n\n# Choosing the number of clusters\n\nplot(kmeansClusters_rep)\n\n\n\nkgroup_4 = kmeansClusters_rep[[3]]@cluster\n\nmostFollowed(rownames(clusterdataf)[kgroup_4 == 1]) # Group 1\nmostFollowed(rownames(clusterdataf)[kgroup_4 == 2]) # Group 2\nmostFollowed(rownames(clusterdataf)[kgroup_4 == 3]) # Group 3\nmostFollowed(rownames(clusterdataf)[kgroup_4 == 4]) # Group 4\n",
+    "contents" : "# install.packages(\"flexclust\")\n#library(stats)\nlibrary(flexclust)\nlibrary(cluster)\n\n#### K-MEANS EUCLIDEAN CLUSTERING ####\n\n# Creating the kmeans object\n# kmeansClusters = kmeans(clusterdataf, centers = 5)\n\nkmeansClusters = stepFlexclust(clusterdataf, k = 4, nrep = 1000, FUN = cclust, multicore = TRUE)\n\nsummary(kmeansClusters)\n\nkcenters = kmeansClusters@centers \ndaisy(kcenters, metric = \"manhattan\") # distances beetween the cluster centers\n\n# Cluster of each instance\n\n# kgroup = kmeansClusters$cluster\nkgroup_5 = clusters(kmeansClusters)\n\n# Most seen exams in each group\n\nmostFollowed(rownames(clusterdataf)[kgroup_5 == 1]) # Group 1\n# kcenters[1,order(kcenters[1,])] # similar result\nmostFollowed(rownames(clusterdataf)[kgroup_5 == 2]) # Group 2\nmostFollowed(rownames(clusterdataf)[kgroup_5 == 3]) # Group 3\nmostFollowed(rownames(clusterdataf)[kgroup_5 == 4]) # Group 4\n\nhist(kgroup_5, breaks = 5)\n\n\n\n#### DIFFERENT K k-MEANS CLUSTERING ####\n\n### For 2 to 15 clusters \nkmeansClusters_rep = stepFlexclust(clusterdataf, k = 2:15, nrep = 600, FUN = cclust, multicore = TRUE)\n\n\n# Choosing the number of clusters\n\nplot(kmeansClusters_rep)\n\n\n\nkgroup_4 = kmeansClusters_rep[[3]]@cluster\n\nmostFollowed(rownames(clusterdataf)[kgroup_4 == 1]) # Group 1\nmostFollowed(rownames(clusterdataf)[kgroup_4 == 2]) # Group 2\nmostFollowed(rownames(clusterdataf)[kgroup_4 == 3]) # Group 3\nmostFollowed(rownames(clusterdataf)[kgroup_4 == 4]) # Group 4\n",
     "created" : 1494490054296.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "2066203213",
+    "hash" : "3763786030",
     "id" : "BDA4CD42",
-    "lastKnownWriteTime" : 1494946221,
-    "last_content_update" : 1494946221535,
+    "lastKnownWriteTime" : 1495099929,
+    "last_content_update" : 1495099929916,
     "path" : "D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis/kmeans.R",
     "project_path" : "kmeans.R",
     "properties" : {

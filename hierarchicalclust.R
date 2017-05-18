@@ -13,6 +13,8 @@ distances = daisy(clusterdataf,
 ComplClusters = hclust(distances, method = "complete")
 WardClusters = hclust(distances, method = "ward.D") # threating the variables as numeric
 
+
+ComplClusters = agnes(distances, diss = TRUE, method = "complete")
 WardClusters = agnes(distances, diss = TRUE, method = "ward")
 
 #### IDENTIFYING MOST FOLLOWED COURSES IN CLUSTERS ####
@@ -41,17 +43,20 @@ mostFollowed = function(k, percentage = 0.7){
 #### Plotting an interactive deindogram to see the courses
 
 # Complete method
-plot(ComplClusters, labels = other_info$immyear)
+plot(ComplClusters, labels = other_info$immyear, which.plot = 2)
 identify(ComplClusters, mostFollowed) # click over a branch to see the most followed courses!
 
 # Ward method
-plot(WardClusters, labels = other_info$immyear)
+plot(WardClusters, labels = other_info$immyear, which.plot = 2)
 identify(WardClusters, mostFollowed) # click over a branch to see the most followed courses!
 
 
-hist(cutree(ComplClusters, h = .83))
+hgroup_3 = cutree(WardClusters, k = 3)
 
 
+as.dendrogram(WardClusters)[[1]][[1]]
+as.dendrogram(WardClusters)[[1]][[2]]
+as.dendrogram(WardClusters)[[2]]
 
 
 ### DATA REPRESENTATION ###
@@ -62,7 +67,7 @@ library(dendextend)
 library(circlize)
 
 # create a dendrogram
-dend <- as.dendrogram(ComplClusters)
+dend <- as.dendrogram(WardClusters)
 
 # modify the dendrogram to have some colors in the branches and labels
 dend <- dend %>% 
@@ -75,26 +80,21 @@ circlize_dendrogram(dend, labels_track_height = NA, dend_track_height = .9, labe
 
 
 # NOTES FOR THE PAPER
-# first two merged
-clusterdataf[c(38,110),]
-as.matrix(distances)["0000439075","0000434475"]
-
-# first two with a distance different from 0
-WardClusters$height[8]
-WardClusters$merge[8]
-
-clusterdataf[c(129,165),]
-as.matrix(distances)["0000365303","0000364326"] # those two differs just for RETI DI TELECOMUNICAZIONI M
-
-# the first unit merged to a cluster was unit 212, at stage 35, with a distance from cluster of 322
-WardClusters$merge[35, ]
-WardClusters$height[35]
 
 # complete height
-ComplClusters$height[27]
-max(as.matrix(distances)["0000364326", "0000366086"])
+ComplClusters$merge[27]
+min(as.matrix(distances)["0000364326", "0000366086"])
+
+# the first unit merged to an already formed cluster was unit 212, at stage 27
+WardClusters$merge[9, ]
+WardClusters$height[9]
+WardClusters$merge[27, ]
+WardClusters$height[27]
 
 cbind(
-  t(clusterdataf[c(129,165, 222),]),
-  apply(clusterdataf[c(129,165, 212),], 2, mean),
-  apply(clusterdataf[c(129,165, 212),], 2, var))
+  t(clusterdataf[c(129, 165,222),]),
+  apply(clusterdataf[c(129,165),], 2, mean),
+  apply(clusterdataf[c(129,165),], 2, var))
+
+# via euclidean distance
+sqrt(2/3 * sqrt(sum((t(clusterdataf[222,]) -  apply(clusterdataf[c(129,165),], 2, mean))^2)))

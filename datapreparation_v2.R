@@ -43,3 +43,8 @@ image(as.matrix(datafexam_ordered), xlab = "Matricole", ylab = "Esami", col = c(
 #### FINAL CHECKS ####
 
 datafexam_ordered[(datafexam_ordered == 1 | datafexam_ordered == 0) == FALSE]
+
+
+
+#### EXPORTING DATA FOR PYTHON ####
+write.csv(clusterdataf, "Python/clusterdata.csv", row.names = FALSE)

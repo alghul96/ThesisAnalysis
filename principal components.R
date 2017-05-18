@@ -17,7 +17,7 @@ pca_data$loadings[, 1:3]
 #               angle = 70)
 
 plot3d(pca_data$scores[, 1], pca_data$scores[, 2], pca_data$scores[, 3], 
-       col = kgroup_4)
+       col = hgroup_3)
 open3d()
 plot3d(pca_data$scores[, 1], pca_data$scores[, 2], pca_data$scores[, 3], 
-       col = kgroup_5)
+       col = kgroup_3)

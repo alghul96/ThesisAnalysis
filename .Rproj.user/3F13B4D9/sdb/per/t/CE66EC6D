@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "import numpy as np\nimport pandas as pd\nimport pylab\nimport matplotlib.pyplot as plt\nfrom matplotlib import cm\nfrom mixture_models import VBBMM\n\ndata = np.array(pd.read_csv('clusterdata.csv'))\n\n# initialise bernoulli mixture model with 3 components\nn_comoponents = 3;\nbmm = VBBMM(n_components = n_comoponents, c = 0.6, d = 0.4, compute_score = True, verbose = True)\n\nbmm = bmm.fit(data)\nprint bmm\n\nmodelclust = bmm.predict(data)\n",
+    "created" : 1495132125949.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1791543728",
+    "id" : "CE66EC6D",
+    "lastKnownWriteTime" : 1495132675,
+    "last_content_update" : 1495132675092,
+    "path" : "D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis/Python/mixtureclustering.py",
+    "project_path" : "Python/mixtureclustering.py",
+    "properties" : {
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "python"
+}
