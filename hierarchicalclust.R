@@ -17,28 +17,12 @@ WardClusters = hclust(distances, method = "ward.D") # threating the variables as
 ComplClusters = agnes(distances, diss = TRUE, method = "complete")
 WardClusters = agnes(distances, diss = TRUE, method = "ward")
 
+
+
 #### IDENTIFYING MOST FOLLOWED COURSES IN CLUSTERS ####
 
 # The following code produces an interactive deindogram showing the most followed
-# exams for each group of variables considered
-
-
-# building a function to see most followed exam names given a vector of students
-
-mostFollowed = function(k, percentage = 0.7){
-  
-  course_freq = apply(clusterdataf[k, ], 2, mean)
-  is_popular = (course_freq >= percentage) & (course_freq <= 1) # seeing which courses are more frequent
-  
-  most_followed = course_freq[is_popular] # selection of the courses
-  most_followed_ordered = most_followed[order(course_freq[is_popular], decreasing = T)] # ordering
-  
-  print(length(k))
-  print(as.data.frame(most_followed_ordered))
-  cat("____________________________________________________________________\n")
-
-}
-
+# exams for each group of variables considered (works only with hclust)
 
 #### Plotting an interactive deindogram to see the courses
 
@@ -53,10 +37,9 @@ identify(WardClusters, mostFollowed) # click over a branch to see the most follo
 
 hgroup_3 = cutree(WardClusters, k = 3)
 
+# Seeing the groups
+mostFollowed_byclust(hgroup_3)
 
-as.dendrogram(WardClusters)[[1]][[1]]
-as.dendrogram(WardClusters)[[1]][[2]]
-as.dendrogram(WardClusters)[[2]]
 
 
 ### DATA REPRESENTATION ###
@@ -79,7 +62,8 @@ par(mar = rep(0,4))
 circlize_dendrogram(dend, labels_track_height = NA, dend_track_height = .9, labels = FALSE)
 
 
-# NOTES FOR THE PAPER
+
+#### NOTES FOR THE PAPER ####
 
 # complete height
 ComplClusters$merge[27]

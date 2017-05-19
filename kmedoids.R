@@ -19,6 +19,6 @@ pc
 kgroup_3 = pc$pamobject$cluster
 pc$pamobject$medoids
 
-
+mostFollowed_byclust(kgroup_3)
 
 cluster.stats(distances, kmedoidsClusters$cluster)

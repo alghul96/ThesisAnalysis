@@ -9,6 +9,7 @@ Supervisor: Professor Claudio Sartori from Department of Computer Science and En
 - **datapreparation_v2.R**: Where data are imported and prepared for the Analysis. Contents:
   - Data import
   - Creation of a sparse binary matrix for Cluster Analysis
+- **external_functions.R**: Script containing external functions usefull for the Analysis.
 - **hierarchicalclust.R**: Script regarding hierarchical clustering methods. Contents:
   - Computation of the distance matrix
   - Creation of cluster via Divisive Methods
@@ -17,4 +18,9 @@ Supervisor: Professor Claudio Sartori from Department of Computer Science and En
   - Computation for k-means for k clusters
   - Computation for k-means for different cluster dimentions
   - Methods for choosing the number of clusters
-- **model-based.R**: Script containing Mixture Model Based clustering methods. 
+- **kmedoids**: Implementation of k-medoids clustering methods. 
+- **model-based.R**: Script containing Mixture Model Based clustering methods.
+  - In the script mixtureclustering.py is called via Python4R package
+- **Python**: In this folder are contained:
+  - **mixture_models.py**: code from package https://github.com/AmazaspShumik/sklearn-bayes used for fitting a Variational Bayes Bernoulli Mixture Model.
+  - **mixtureclustering.py**: script fitting the mixture model on data

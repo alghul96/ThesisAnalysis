@@ -1,22 +1,29 @@
 #install.packages("mclust")
-library(mclust)
+# library(mclust)
 library(PythonInR)
-#finitmixtClusters = Mclust(clusterdataf, G = 5)
 
 # PLEASE TRY NOT TO RUN IN RSTUDIO
 
-autodetectPython()
-pyConnect()
+pyConnect() # connecting to python session
+
 pyExecfile('Python/mixtureclustering.py')
-pyExec("print modelclust")
+
 other_info["mixtgroup"] = pyGet("modelclust", simplify = FALSE) + 1
+mixtgroup_3 = as.vector(other_info["mixtgroup"])
+mixtprob = pyGet("clustprob", simplify = TRUE)
+mixtprototypes = pyGet("prototype", simplify = TRUE)
 
 pyExit()
 
-mixtgroup_3 = as.vector(other_info["mixtgroup"])
-
 
 # see what groups follow most
-mostFollowed(rownames(clusterdataf)[mixtgroup_3 == 1]) # Group 1
-mostFollowed(rownames(clusterdataf)[mixtgroup_3 == 2]) # Group 2
-mostFollowed(rownames(clusterdataf)[mixtgroup_3 == 3]) # Group 3
+mostFollowed_byclust(other_info[,3])
+
+
+# let's give a look at the predicted class and to the probabilities
+cbind(mixtgroup_3, mixtprob) 
+
+hist(mixtprob[,3])
+
+cbind(names(clusterdataf), mixtprototypes)
+image(mixtprototypes, col = c(0,2))
