@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#install.packages(\"mclust\")\nlibrary(mclust)\nlibrary(PythonInR)\n#finitmixtClusters = Mclust(clusterdataf, G = 5)\n\n# PLEASE TRY NOT TO RUN IN RSTUDIO\n\nautodetectPython()\npyConnect()\npyExecfile('Python/mixtureclustering.py')\npyExec(\"print modelclust\")\nother_info[\"mixtgroup\"] = pyGet(\"modelclust\", simplify = FALSE) + 1\n\npyExit()\n",
+    "created" : 1495131325656.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "731133327",
+    "id" : "12CAF981",
+    "lastKnownWriteTime" : 1495178235,
+    "last_content_update" : 1495178362872,
+    "path" : "D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis/model-based.R",
+    "project_path" : "model-based.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

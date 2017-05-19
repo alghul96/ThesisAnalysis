@@ -20,4 +20,4 @@ plot3d(pca_data$scores[, 1], pca_data$scores[, 2], pca_data$scores[, 3],
        col = hgroup_3)
 open3d()
 plot3d(pca_data$scores[, 1], pca_data$scores[, 2], pca_data$scores[, 3], 
-       col = kgroup_3)
+       col = other_info[,3])
