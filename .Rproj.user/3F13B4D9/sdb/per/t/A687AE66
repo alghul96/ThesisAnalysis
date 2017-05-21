@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "import numpy as np\nimport pandas as pd\nimport pylab\nimport matplotlib.pyplot as plt\nfrom matplotlib import cm\nfrom mixture_models import VBBMM\n\ndata = np.array(pd.read_csv('clusterdata.csv')) # reading the csv from R\n\n# initialise bernoulli mixture model with 3 components\n\nbmm = VBBMM(n_components = 3, n_init = 200, c = 0.2, d = 0.7, compute_score = True, verbose = True) # initializing the object\n\nbmm = bmm.fit(data)\nprint bmm\n\nmodelclust = bmm.predict(data)\nprint modelclust\n\nclustprob = bmm.predict_proba(data)\n# print clustprob[:, 0]\n# print clustprob[:, 1]\n# print clustprob[:, 2]\n\n\nprototype = bmm.cluster_prototype()\n\n# print prototype[:, 0] # prototype of student of cluster 1\n# print prototype[:, 1] # prototype of student of cluster 2\n# print prototype[:, 2] # prototype of student of cluster 3\n\nprint(bmm.scores_[1:])\n\nplt.hist(modelclust, bins = 3)\nplt.show()\n",
+    "created" : 1495377951095.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3383548577",
+    "id" : "A687AE66",
+    "lastKnownWriteTime" : 1495379435,
+    "last_content_update" : 1495379435197,
+    "path" : "D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis/Python/mixtureclustering.py",
+    "project_path" : "Python/mixtureclustering.py",
+    "properties" : {
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "python"
+}

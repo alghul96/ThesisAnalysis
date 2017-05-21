@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "# install.packages(\"flexclust\")\n#library(stats)\nlibrary(flexclust)\nlibrary(cluster)\n\n#### K-MEANS EUCLIDEAN CLUSTERING ####\n\n# Creating the kmeans object\n# kmeansClusters = kmeans(clusterdataf, centers = 5)\n\nkmeansClusters = stepFlexclust(clusterdataf, k = 4, nrep = 1000, FUN = cclust, multicore = TRUE)\n\nsummary(kmeansClusters)\n\nkcenters = kmeansClusters@centers \ndaisy(kcenters, metric = \"manhattan\") # distances beetween the cluster centers\n\n\n\n#### DIFFERENT K k-MEANS CLUSTERING ####\n\n### For 2 to 15 clusters \nkmeansClusters_rep = stepFlexclust(clusterdataf, k = 2:15, nrep = 600, FUN = cclust, multicore = TRUE)\n\n\n# Choosing the number of clusters\n\nplot(kmeansClusters_rep)\n\n\n\nkgroup_4 = kmeansClusters_rep[[3]]@cluster\nkgroup_3 = kmeansClusters_rep[[2]]@cluster\n\nmostFollowed_byclust(kgroup_3)\n",
+    "created" : 1494490054296.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2929577183",
+    "id" : "BDA4CD42",
+    "lastKnownWriteTime" : 1495209266,
+    "last_content_update" : 1495209266,
+    "path" : "D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis/kmeans.R",
+    "project_path" : "kmeans.R",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

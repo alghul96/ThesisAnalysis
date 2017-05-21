@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#install.packages(\"mclust\")\n# library(mclust)\nlibrary(PythonInR)\n\n# PLEASE TRY NOT TO RUN IN RSTUDIO\n\nsetwd(\"D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis/Python\")\npyConnect() # connecting to python session\n\npyExecfile('mixtureclustering.py')\n\nother_info[\"mixtgroup\"] = pyGet(\"modelclust\", simplify = FALSE) + 1\nmixtgroup_3 = as.vector(other_info[\"mixtgroup\"])\nmixtprob = pyGet(\"clustprob\", simplify = TRUE)\nmixtprototypes = pyGet(\"prototype\", simplify = TRUE)\n\npyExit()\n\n\n# see what groups follow most\nmostFollowed_byclust(other_info[,3])\n\ntable(other_info[,3])\n\nnames(other_info)[other_info[3] == 3]\n\n# let's give a look at the predicted class and to the probabilities\ncbind(mixtgroup_3, mixtprob) \n\nhist(mixtprob[,3])\n\ncbind(names(clusterdataf), mixtprototypes)\nimage(mixtprototypes, col = c(0,2))\n",
+    "created" : 1495131325656.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2612348793",
+    "id" : "12CAF981",
+    "lastKnownWriteTime" : 1495380700,
+    "last_content_update" : 1495380700542,
+    "path" : "D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis/model-based.R",
+    "project_path" : "model-based.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

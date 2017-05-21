@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(flexclust)\nlibrary(fpc)\nlibrary(cluster)\n\ndistances = daisy(clusterdataf, \n                  type = list(asymm = c(1:ncol(clusterdataf))), \n                  metric = \"gower\")\n\nkmedoidsClusters = pam(distances, k = 4, diss = TRUE)\n\nkgroup_4 = kmedoidsClusters$cluster\n\n\n##### EVALUATING THE NUMBER OF CLUSTERS #######\n\npc = pamk(distances, krange = 1:14, criterion = \"asw\", diss = TRUE)\npc\n\nkgroup_3 = pc$pamobject$cluster\npc$pamobject$medoids\n\nmostFollowed_byclust(kgroup_3)\n\ncluster.stats(distances, kmedoidsClusters$cluster)\n",
+    "created" : 1494946132829.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "904055898",
+    "id" : "59A04094",
+    "lastKnownWriteTime" : 1495209067,
+    "last_content_update" : 1495209067,
+    "path" : "D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis/kmedoids.R",
+    "project_path" : "kmedoids.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

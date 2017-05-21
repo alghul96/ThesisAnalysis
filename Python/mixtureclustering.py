@@ -9,7 +9,7 @@ data = np.array(pd.read_csv('clusterdata.csv')) # reading the csv from R
 
 # initialise bernoulli mixture model with 3 components
 
-bmm = VBBMM(n_components = 3, n_init = 6, c = 0.2, d = 0.7, compute_score = True, verbose = True) # initializing the object
+bmm = VBBMM(n_components = 3, n_init = 200, c = 0.2, d = 0.7, compute_score = True, verbose = True) # initializing the object
 
 bmm = bmm.fit(data)
 print bmm
