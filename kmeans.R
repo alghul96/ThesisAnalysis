@@ -8,13 +8,14 @@ library(cluster)
 # Creating the kmeans object
 # kmeansClusters = kmeans(clusterdataf, centers = 5)
 
-kmeansClusters = stepFlexclust(clusterdataf, k = 4, nrep = 1000, FUN = cclust, multicore = TRUE)
+kmeansClusters = stepFlexclust(clusterdataf, k = 3, nrep = 10000, FUN = cclust, multicore = TRUE)
 
 summary(kmeansClusters)
 
 kcenters = kmeansClusters@centers 
 daisy(kcenters, metric = "manhattan") # distances beetween the cluster centers
 
+kgroup_3 = kmeansClusters@cluster
 
 
 #### DIFFERENT K k-MEANS CLUSTERING ####

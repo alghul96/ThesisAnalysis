@@ -7,6 +7,8 @@
 
 library(readxl)
 laureati <- read_excel("D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis/laureati.xls", sheet = "recode 2") # import of the recoded dataset
+laureati = read_excel("D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis/laureati.xls", sheet = "recode 3") # import of the third recode
+
 
 #### CREATION OF THE ANALYSIS DATASET ####
 
@@ -48,3 +50,4 @@ datafexam_ordered[(datafexam_ordered == 1 | datafexam_ordered == 0) == FALSE]
 
 #### EXPORTING DATA FOR PYTHON ####
 write.csv(clusterdataf, "Python/clusterdata.csv", row.names = FALSE)
+write.csv(datafexam, "Python/clusterdata2.csv", row.names = FALSE)
