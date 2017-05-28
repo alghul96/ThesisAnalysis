@@ -6,9 +6,9 @@ distances = daisy(clusterdataf,
                   type = list(asymm = c(1:ncol(clusterdataf))), 
                   metric = "gower")
 
-kmedoidsClusters = pam(distances, k = 4, diss = TRUE)
+kmedoidsClusters = pam(distances, k = 3, diss = TRUE)
 
-kgroup_4 = kmedoidsClusters$cluster
+kmedgroup_3 = kmedoidsClusters$cluster
 
 
 ##### EVALUATING THE NUMBER OF CLUSTERS #######
@@ -16,9 +16,9 @@ kgroup_4 = kmedoidsClusters$cluster
 pc = pamk(distances, krange = 1:14, criterion = "asw", diss = TRUE)
 pc
 
-kgroup_3 = pc$pamobject$cluster
+kmedgroup_3 = pc$pamobject$cluster
 pc$pamobject$medoids
 
-mostFollowed_byclust(kgroup_3)
+mostFollowed_byclust(kmedgroup_3)
 
 cluster.stats(distances, kmedoidsClusters$cluster)

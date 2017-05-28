@@ -21,16 +21,19 @@ kgroup_3 = kmeansClusters@cluster
 #### DIFFERENT K k-MEANS CLUSTERING ####
 
 ### For 2 to 15 clusters 
-kmeansClusters_rep = stepFlexclust(clusterdataf, k = 2:15, nrep = 600, FUN = cclust, multicore = TRUE)
+kmeansClusters_rep = stepFlexclust(clusterdataf, k = 2:8, nrep = 600, FUN = cclust, multicore = TRUE)
 
 
-# Choosing the number of clusters
+#########################################
+#### Choosing the number of clusters ####
+#########################################
 
-plot(kmeansClusters_rep)
+plot(kmeansClusters_rep) # from the within sum of squares, we see that it become stable after 2/3 clusters 
 
+par(mfrow = c(1,3))
+for(i in 1:3){
+  print(cluster.stats(distances, kmeansClusters_rep[[i]]@cluster))
+  plot(silhouette(kmeansClusters_rep[[i]]@cluster, distances), cex.names=0.6)
+}
 
-
-kgroup_4 = kmeansClusters_rep[[3]]@cluster
-kgroup_3 = kmeansClusters_rep[[2]]@cluster
-
-mostFollowed_byclust(kgroup_3)
+# according to the average silhouette, we choose three clusters
