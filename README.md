@@ -3,9 +3,14 @@ Code for the analysis of my bachelor thesis. The analysis regards student career
 Supervisor: Professor Claudio Sartori from Department of Computer Science and Engineering of University of Bologna.
 
 ## Contents
+
+- **Analysis.Rproj**: Rstudio Project
+
+### Data
 - **Carriere.xlsx**: first dataset
 - **Laureati.xls**: second dataset
-- **Analysis.Rproj**: Rstudio Project
+
+### R
 - **datapreparation_v2.R**: Where data are imported and prepared for the Analysis. Contents:
   - Data import
   - Creation of a sparse binary matrix for Cluster Analysis
@@ -21,6 +26,7 @@ Supervisor: Professor Claudio Sartori from Department of Computer Science and En
 - **kmedoids**: Implementation of k-medoids clustering methods. 
 - **model-based.R**: Script containing Mixture Model Based clustering methods.
   - In the script mixtureclustering.py is called via Python4R package
-- **Python**: In this folder are contained:
+
+### Python
   - **mixture_models.py**: code from package https://github.com/AmazaspShumik/sklearn-bayes used for fitting a Variational Bayes Bernoulli Mixture Model.
   - **mixtureclustering.py**: script fitting the mixture model on data
