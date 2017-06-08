@@ -1,9 +1,17 @@
 {
-    "path" : "D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis",
+    "path" : "D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis/R",
     "sortOrder" : [
         {
             "ascending" : true,
             "columnIndex" : 2
+        },
+        {
+            "ascending" : false,
+            "columnIndex" : 3
+        },
+        {
+            "ascending" : false,
+            "columnIndex" : 4
         }
     ]
 }

@@ -22,3 +22,20 @@ pc$pamobject$medoids
 mostFollowed_byclust(kmedgroup_3)
 
 cluster.stats(distances, kmedoidsClusters$cluster)
+
+
+
+
+#####################################
+##### ON REDUCED DATAFRAME ##########
+#####################################
+
+library(flexclust)
+library(fpc)
+library(cluster)
+
+
+pc_reduce = pamk(distances_reduced, krange = 1:14, criterion = "asw", diss = TRUE)
+kmedgroup_reduced = pc_reduce$pamobject$cluster
+
+mostFollowed_byclust(kmedgroup_reduced)

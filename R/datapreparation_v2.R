@@ -1,12 +1,12 @@
 ##############################
 # From the previous version ##
 # the number of variables   ##
-# is reduced of 71          ##
+# is reduced of 72          ##
 ##############################
 
 
 library(readxl)
-laureati <- read_excel("D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis/laureati.xls", sheet = "recode 2") # import of the recoded dataset
+# laureati <- read_excel("D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis/laureati.xls", sheet = "recode 2") # import of the recoded dataset
 laureati = read_excel("D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis/laureati.xls", sheet = "recode 3") # import of the third recode
 
 
@@ -49,5 +49,21 @@ datafexam_ordered[(datafexam_ordered == 1 | datafexam_ordered == 0) == FALSE]
 
 
 #### EXPORTING DATA FOR PYTHON ####
-write.csv(clusterdataf, "Python/clusterdata.csv", row.names = FALSE)
 write.csv(datafexam, "Python/clusterdata2.csv", row.names = FALSE)
+
+
+
+#========================================#
+####          REDUCED DATASET         ####
+#========================================#
+
+
+# cbind(row.names(datafexam)[as.numeric(row.names(datafexam)) < 400000], !(row.names(datafexam)[as.numeric(row.names(datafexam)) < 400000] %in% row.names(datafexam)[kgroup_3 == 3]))
+
+
+datafexam_reduced = datafexam[as.numeric(row.names(datafexam)) > 390000, ] # Removing older students
+
+exams_frequencies_reduced = apply(datafexam_reduced, 2, mean)
+datafexam_reduced = datafexam_reduced[, exams_frequencies_reduced > 0 & exams_frequencies_reduced < 1] # Removing unecessary exams
+
+dim(datafexam_reduced) # we now have only 86 exams for 281

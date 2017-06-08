@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "as.factor.dataframe = function(x){\n  \n  output_dataframe = data.frame(row.names = rownames(x))\n  \n  for(i in names(x)){\n    \n        output_dataframe[, i] = factor(x[ ,i])\n    \n  }\n  return(output_dataframe) \n}\n\n\n\nmostFollowed = function(k, percentage = 0.7){\n  \n  course_freq = apply(clusterdataf[k, ], 2, mean)\n  is_popular = (course_freq >= percentage) & (course_freq <= 1) # seeing which courses are more frequent\n  \n  most_followed = course_freq[is_popular] # selection of the courses\n  most_followed_ordered = most_followed[order(course_freq[is_popular], decreasing = T)] # ordering\n  \n  print(length(k))\n  print(as.data.frame(most_followed_ordered))\n  cat(\"____________________________________________________________________\\n\")\n  \n}\n\n\n\nmostFollowed_byclust = function(clustergroup, X = clusterdataf, percentage = 0.7, graph = TRUE, verbose = TRUE){\n  \n  cluster_number = levels(factor(clustergroup))\n  \n  if(graph == TRUE) hist(clustergroup, main = \"Distribution of clusters\", breaks = length(cluster_number), col = \"lightblue\")\n  \n  exam_per_group = data.frame(row.names = colnames(X))\n  \n  for(i in 1:length(cluster_number)){\n    \n    k = clustergroup == as.numeric(i) # select the cluster instances\n  \n    course_freq = apply(X[k, ], 2, mean) # compute the frequencies of group k in dataframe\n    is_popular = (course_freq >= percentage) & (course_freq <= 1) # selecting more frequent courses\n    \n    most_followed = course_freq[is_popular] # selection of the courses\n    most_followed_ordered = most_followed[order(course_freq[is_popular], decreasing = T)] # ordering\n    \n    exam_per_group[,i] = course_freq\n    \n    if (verbose == TRUE){\n      print(paste(\"Group \", i, \"of dimention\", length(names(X)[k == T])))\n      print(as.data.frame(most_followed_ordered))\n      cat(\"____________________________________________________________________\\n\")\n    }\n\n    \n  }\n  \n  return(exam_per_group)\n  \n}\n",
+    "created" : 1496936777823.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3876511696",
+    "id" : "7E311265",
+    "lastKnownWriteTime" : 1496831237,
+    "last_content_update" : 1496831237,
+    "path" : "D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis/R/external_functions.R",
+    "project_path" : "R/external_functions.R",
+    "properties" : {
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

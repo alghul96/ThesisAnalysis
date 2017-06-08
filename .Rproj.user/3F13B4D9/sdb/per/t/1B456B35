@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "studyplan_finder = function(binarydataf, technique, nclust, nsim = 1, return_class = TRUE){\n  \n  library(flexclust)\n  library(cluster)\n  library(fpc)\n  \n  if(class(binarydataf) != \"data.frame\") warning(\"Input should be a binary data frame.\")\n  if(class(technique) != \"list\") stop(\"Should provide a list of valid clustering techniques. Please input a list of techniques.\")\n  if(!(technique %in% list(\"k-means\"))) stop(\"Should provide a list of valid clustering techniques, e.g. list('k-means')\")\n  if(nclust == 0) stop(\"At least one cluster is needed to perform analysis.\")\n  \n  \n  # K - means\n  if(\"k-means\" %in% technique){\n    cat(\"\\nPerforming k-means clustering. It might take a while depending on number of simulations...\")\n    \n    \n    \n  }\n  \n  \n}\n\n\nstudyplan_finder(clusterdataf, technique = list(\"k-means\"), nclust = 1)\n",
+    "created" : 1496935267189.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2207474619",
+    "id" : "1B456B35",
+    "lastKnownWriteTime" : 1496936803,
+    "last_content_update" : 1496936803002,
+    "path" : "D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis/auto_analysis.R",
+    "project_path" : "auto_analysis.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

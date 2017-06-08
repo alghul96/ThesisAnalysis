@@ -100,3 +100,32 @@ identify(HybridClusters, mostFollowed) # click over a branch to see the most fol
 hygroup_3 = cutree(HybridClusters, k = 3)
 
 table(hgroup_3, hygroup_3)
+
+
+
+
+
+#####################################
+##### ON REDUCED DATAFRAME ##########
+#####################################
+
+library(cluster)
+library(stats)
+library(hybridHclust)
+
+clusterdataf = datafexam_reduced
+
+distances_reduced = daisy(as.factor.dataframe(clusterdataf), 
+                          type = list(asymm = c(1:ncol(datafexam_reduced))), # threating the variables as asymmetric binaries
+                          metric = "gower")
+
+WardClusters_reduced = hclust(distances_reduced, method = "ward.D")
+HybridClusters_reduced =  hybridHclust(clusterdataf)
+
+
+plot(WardClusters_reduced, labels = F)
+identify(WardClusters_reduced, FUN = mostFollowed)
+
+
+plot(HybridClusters_reduced, labels = F)
+identify(HybridClusters_reduced, FUN = mostFollowed)

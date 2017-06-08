@@ -67,6 +67,8 @@ mostFollowed_byclust(temp, .5)
 plot(silhouette(temp, distances))
 rm(temp)
 
+
+
 ##############################
 #### CLUSTER COMPOSITION #####
 ##############################
@@ -81,5 +83,16 @@ abline(v = c(30.5, 60.5), col = "white", lwd = 2)
 # Vediamo come quelli del primo cluster sono quelli di anni precedenti alle immatricolazioni del 2012 
 table(other_info[,1], other_info[,3])
 
-most_frequented_byclust = courses_mixtgroup[apply(courses_mixtgroup[,2:3],1,sum) > 0.3, 2:3]
+most_frequented_byclust = courses_mixtgroup[apply(courses_mixtgroup, 1, sum) > 0.3,]
+
+
+###########################
+#### REDUCED DATAFRAME ####
+###########################
+
+courses_mixtgroup_red = mostFollowed_byclust(mixtgroup_reduced, X = datafexam_reduced, verbose = F)
+
+plot(courses_mixtgroup_red)
+
+most_frequented_byclust_red = courses_mixtgroup_red[apply(courses_mixtgroup_red, 1, sum) > 0.2,]
 

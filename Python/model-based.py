@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 from mixture_models import VBBMM
 
-data = np.array(pd.read_csv('clusterdata2.csv')) # reading the csv from R
+#data = np.array(pd.read_csv('clusterdata2.csv')) # reading the csv from R
 
 # initialise bernoulli mixture model with 3 components
 
@@ -32,3 +32,5 @@ prototype = bmm.cluster_prototype()
 
 plt.hist(modelclust)
 plt.show()
+
+

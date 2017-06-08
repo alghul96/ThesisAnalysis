@@ -48,19 +48,36 @@ for(i in 1:3){
 ##### ON REDUCED DATAFRAME ##########
 #####################################
 
-# selecting only the most followed exams without the mandatory ones
-clusterdataf = datafexam[, mostFollowed_byclust(rep(1, 322)) > 0.3 & mostFollowed_byclust(rep(1, 322)) < 1]
+library(flexclust)
+library(fpc)
+library(cluster)
 
-dim(clusterdataf) # only on 22 exams
+clusterdataf = datafexam_reduced
+kmeansClusters_rep_reduced = stepFlexclust(clusterdataf, k = 2:8, nrep = 1000, FUN = cclust, multicore = TRUE)
+plot(kmeansClusters_rep_reduced) # from the within sum of squares, we see that it become stable after 2 or 3 clusters 
 
-kmeansClusters_rep_reduced = stepFlexclust(clusterdataf, k = 2:10, nrep = 800, FUN = cclust, multicore = TRUE)
+distances_reduced = daisy(clusterdataf, 
+                    type = list(asymm = c(1:ncol(datafexam_reduced))), # threating the variables as asymmetric binaries
+                    metric = "gower")
 
-plot(kmeansClusters_rep_reduced) # from the within sum of squares, we see that it become stable after 2/3 clusters 
-
-# we see that with more clusters the 
+# average silhouette width stats
 
 par(mfrow = c(1,3))
 for(i in 1:3){
-  print(cluster.stats(distances, kmeansClusters_rep_reduced[[i]]@cluster))
-  plot(silhouette(kmeansClusters_rep_reduced[[i]]@cluster, distances), cex.names=0.6)
+  print(cluster.stats(distances_reduced, kmeansClusters_rep_reduced[[i]]@cluster))
+  plot(silhouette(kmeansClusters_rep_reduced[[i]]@cluster, distances_reduced), cex.names=0.6)
 }
+
+
+mostFollowed_byclust(kmeansClusters_rep_reduced[[1]]@cluster, percentage = 0.5) # looking frequencies inside two clusters
+
+
+
+#### MORE THAN TWO GROUPS ####
+
+
+mostFollowed_byclust(kmeansClusters_rep_reduced[[2]]@cluster, percentage = .5) # 3 clusters
+mostFollowed_byclust(kmeansClusters_rep_reduced[[3]]@cluster, percentage = .5) # 4 clusters
+
+
+
