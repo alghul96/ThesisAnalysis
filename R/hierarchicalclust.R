@@ -119,6 +119,7 @@ distances_reduced = daisy(as.factor.dataframe(clusterdataf),
                           type = list(asymm = c(1:ncol(datafexam_reduced))), # threating the variables as asymmetric binaries
                           metric = "gower")
 
+
 WardClusters_reduced = hclust(distances_reduced, method = "ward.D")
 HybridClusters_reduced =  hybridHclust(clusterdataf)
 

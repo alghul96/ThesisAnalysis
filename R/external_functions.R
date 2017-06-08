@@ -1,3 +1,5 @@
+#### AS FACTOR DATAFRAME #####
+
 as.factor.dataframe = function(x){
   
   output_dataframe = data.frame(row.names = rownames(x))
@@ -11,6 +13,7 @@ as.factor.dataframe = function(x){
 }
 
 
+#### MOST FOLLOWED #####
 
 mostFollowed = function(k, percentage = 0.7){
   
@@ -26,6 +29,7 @@ mostFollowed = function(k, percentage = 0.7){
   
 }
 
+#### MOST FOLLOWED BYCLUST  #####
 
 
 mostFollowed_byclust = function(clustergroup, X = clusterdataf, percentage = 0.7, graph = TRUE, verbose = TRUE){
@@ -58,5 +62,100 @@ mostFollowed_byclust = function(clustergroup, X = clusterdataf, percentage = 0.7
   }
   
   return(exam_per_group)
+  
+}
+
+
+#### STUDYPLAN FINDER #####
+
+studyplan_finder = function(binarydataf, technique, nclust, nsim = 1, return_class = TRUE){
+  
+  library(flexclust)
+  library(cluster)
+  library(fpc)
+  library(hybridHclust)
+  
+  
+  if(class(binarydataf) != "data.frame") warning("Input should be a binary data frame.")
+  if(class(technique) != "list") stop("Should provide a list of valid clustering techniques. Please input a list of techniques.")
+  if(length(nclust) == 1) if(nclust == 0) stop("At least one cluster is needed to perform analysis.")
+  
+  results = list()
+  
+  
+  cat("\nComputing distance matrix for binary variables...\n")
+  distances = daisy(binarydataf, 
+                    type = list(asymm = c(1:ncol(binarydataf))), # threating the variables as asymmetric binaries
+                    metric = "gower")
+  
+  
+  # K - means
+  if("k-means" %in% technique){
+    cat("\nPerforming k-means clustering. It might take a while depending on number of simulations...\n")
+    kmeans_result = stepFlexclust(binarydataf, k = nclust, nrep = nsim, FUN = cclust, multicore = TRUE, verbose = FALSE)
+    results["kmeans"] = list(kmeans_result)
+    
+  }
+  
+  
+  # K-medoids
+  if("k-medoids" %in% technique){
+    cat("\nPerforming k-medoids clustering...\n")
+    kmedoids_result = pamk(distances, krange = nclust, criterion = "asw", diss = TRUE)
+    results["kmedoids"] = kmedoids_result
+    
+  }
+  
+  
+  # Ward method
+  if("ward" %in% technique){
+    cat("\nPerforming Ward hierarchical clustering...\n")
+    ward_result = hclust(distances, method = "ward.D")
+    results["ward"] = list(ward_result)
+  }
+  
+  
+  # Hybrid hierarchial method
+  if("hybrid" %in% technique){
+    cat("\nPerforming Hybrid hierarchical clustering...\n")
+    hybrid_result = hybridHclust(binarydataf)  
+    results["hybrid"] = list(hybrid_result)
+  }
+  
+  
+  # probability based clustering
+  
+  if("prob" %in% technique){
+    library(PythonInR)
+    cat("\nPerforming Bayes Bernoulli Mixture Model clustering. It might take a while depending on number of simulations...\n")
+    setwd("Python")
+    pyConnect()
+    pyExec("import pandas")
+    
+    cat("\tTransferring variables to Python...\n")
+    pySet("data", value = binarydataf, usePandas = TRUE)
+    pySet("nclusters", value = nclust, usePandas = TRUE)
+    pySet("nsimulations", value = nsim, usePandas = TRUE)
+    
+    cat("\tExecuting the script...")
+    pyExecfile("simpleModelbased.py") # running 
+    
+    mixtgroup = pyGet("modelclust", simplify = FALSE) + 1
+    mixtprob = pyGet("clustprob", simplify = TRUE)
+    mixtprototypes = pyGet("prototype", simplify = TRUE)
+    
+    pyExit()
+    mixture_result = list(clusters = mixtgroup, clusterprob = mixtprob, prototypes = mixtprototypes)
+    results["mixture"] = list(mixture_result)
+    
+  }
+  
+  
+  
+  
+  
+  #cluster.stats(distances, kmeans_result[[i]]@cluster)$avg
+  cat("\n")
+  return(results)
   
 }

@@ -27,6 +27,7 @@ kgroup_3 = kmeansClusters@cluster
 ### For 2 to 15 clusters 
 kmeansClusters_rep = stepFlexclust(clusterdataf, k = 2:8, nrep = 600, FUN = cclust, multicore = TRUE)
 
+kmeansClusters_rep[[2]]@centers
 
 #########################################
 #### Choosing the number of clusters ####
