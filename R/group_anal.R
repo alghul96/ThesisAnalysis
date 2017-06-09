@@ -80,8 +80,8 @@ plot(
 abline(v = c(30.5, 60.5), col = "white", lwd = 2)
 
        
-# Vediamo come quelli del primo cluster sono quelli di anni precedenti alle immatricolazioni del 2012 
-table(other_info[,1], other_info[,3])
+# Vediamo come quelli del terzo cluster sono quelli di anni precedenti alle immatricolazioni del 2012 
+table(other_info[,1], clustergroup[,3])
 
 most_frequented_byclust = courses_mixtgroup[apply(courses_mixtgroup, 1, sum) > 0.3,]
 

@@ -1,3 +1,8 @@
+library(flexclust)
+library(cluster)
+library(fpc)
+library(hybridHclust)
+
 #### AS FACTOR DATAFRAME #####
 
 as.factor.dataframe = function(x){
@@ -68,13 +73,7 @@ mostFollowed_byclust = function(clustergroup, X = clusterdataf, percentage = 0.7
 
 #### STUDYPLAN FINDER #####
 
-studyplan_finder = function(binarydataf, technique, nclust, nsim = 1, return_class = TRUE){
-  
-  library(flexclust)
-  library(cluster)
-  library(fpc)
-  library(hybridHclust)
-  
+studyplan_finder = function(binarydataf, technique, nclust, nsim = 1){
   
   if(class(binarydataf) != "data.frame") warning("Input should be a binary data frame.")
   if(class(technique) != "list") stop("Should provide a list of valid clustering techniques. Please input a list of techniques.")
@@ -102,7 +101,7 @@ studyplan_finder = function(binarydataf, technique, nclust, nsim = 1, return_cla
   if("k-medoids" %in% technique){
     cat("\nPerforming k-medoids clustering...\n")
     kmedoids_result = pamk(distances, krange = nclust, criterion = "asw", diss = TRUE)
-    results["kmedoids"] = kmedoids_result
+    results["kmedoids"] = list(kmedoids_result)
     
   }
   
@@ -134,7 +133,7 @@ studyplan_finder = function(binarydataf, technique, nclust, nsim = 1, return_cla
     
     cat("\tTransferring variables to Python...\n")
     pySet("data", value = binarydataf, usePandas = TRUE)
-    pySet("nclusters", value = nclust, usePandas = TRUE)
+    pySet("nclusters", value = max(nclust), usePandas = TRUE)
     pySet("nsimulations", value = nsim, usePandas = TRUE)
     
     cat("\tExecuting the script...")
@@ -152,10 +151,26 @@ studyplan_finder = function(binarydataf, technique, nclust, nsim = 1, return_cla
   
   
   
-  
-  
   #cluster.stats(distances, kmeans_result[[i]]@cluster)$avg
   cat("\n")
   return(results)
   
+}
+
+
+
+convert_dataframe = function(X){
+  
+  datafexam = data.frame(NULL) # initializing the dataframe
+  
+  for(i in 1:nrow(X)){
+    mat = X[i, 1]
+    exam = X[i, 3]
+    
+    datafexam[mat, exam] = 1
+  }
+  
+  datafexam[is.na(datafexam)] = 0 # filling the NULLs
+  
+  return(datafexam)
 }
