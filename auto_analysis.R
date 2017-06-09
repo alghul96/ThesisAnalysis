@@ -39,11 +39,6 @@ other_info = data.frame(row.names = row.names(datafexam))
 other_info[,"immyear"] = datafexam_ordered[,"immyear"]
 
 
-# reduced dataframe
-datafexam_reduced = datafexam[as.numeric(row.names(datafexam)) > 390000, ] # Removing older students
-exams_frequencies_reduced = apply(datafexam_reduced, 2, mean)
-datafexam_reduced = datafexam_reduced[, exams_frequencies_reduced > 0 & exams_frequencies_reduced < 1] # Removing unecessary exams
-
 
 
 
@@ -150,6 +145,67 @@ abline(v = c(30.5, 60.5), col = "white", lwd = 2)
 table(other_info[,1], clustergroup[,3])
 
 most_frequented_byclust = exam_frequencies$mixture[apply(exam_frequencies$mixture, 1, sum) > 0.3,]
-most_frequented_byclust
+round(most_frequented_byclust, 2)
 
 
+
+
+# ====================================== #
+#           REDUCED DATASET              #
+# ====================================== #
+
+# Now that we've seen the main composition of the full dataset, we only focus into the main two groups. 
+# We'll first find if there are any particular differences between the two. After that, we force the number 
+# of clusters to 4, and we'll look at that composition. 
+
+
+# reduced dataframe
+datafexam_reduced = datafexam[as.numeric(row.names(datafexam)) > 390000, ] # Removing older students
+exams_frequencies_reduced = apply(datafexam_reduced, 2, mean)
+datafexam_reduced = datafexam_reduced[, exams_frequencies_reduced > 0 & exams_frequencies_reduced < 1] # Removing unecessary exams
+
+# performing the analysis on the reduced dataframe
+results1 = studyplan_finder(datafexam_reduced,
+                            technique = list("k-means", "k-medoids", "prob"),
+                            nclust = 2, # results just for 2 clusters
+                            nsim = 1000)  # results based on 1000 simulation per method
+
+
+
+# Saving the clusters into groups
+clustergroup_reduced =  data.frame(row.names = row.names(datafexam_reduced))
+
+clustergroup_reduced[,"kmeans"] = results1$kmeans@cluster # those are from the k-means
+clustergroup_reduced[,"mixture"] = results1$mixture$clusters # those are the clusters obtained from the mixture model
+clustergroup_reduced[,"kmedoids"] = results1$kmedoids[[1]]$clustering
+
+
+par(mfrow = c(1,3))
+exam_frequencies_red = list()
+for(i in names(clustergroup_reduced)){
+  
+  cat("\nInside cluster exam frequencies for", i, "clustering methods on reduced dataframe\n")
+  exam_frequencies_red[[i]] = mostFollowed_byclust(clustergroup = clustergroup_reduced[,i], X = datafexam_reduced, percentage = 0.6, graph = T)
+  
+}
+
+
+# Most followed courses inside clusters for mixture model clustering
+exam_frequencies_red$mixture[apply(exam_frequencies_red$mixture, 1, sum) > 0.2,]
+
+
+
+
+#### CLUSTERING FOR MORE THAN TWO CLUSTERS #####
+
+results2 = studyplan_finder(datafexam_reduced, technique = list("k-means", "ward"), nclust = 3:4, nsim = 1000)
+
+
+# Frequency of exams in clusters
+mostFollowed_byclust(results2$kmeans[[1]]@cluster, percentage = .5, graph = F) # 3 clusters
+mostFollowed_byclust(results2$kmeans[[2]]@cluster, percentage = .5, graph = F) # 4 clusters
+
+
+# Ward deindogram 
+plot(results2$ward, labels = FALSE)
+identify(results2$ward, FUN = mostFollowed)
