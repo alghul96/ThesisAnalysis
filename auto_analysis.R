@@ -19,8 +19,8 @@
 #                                                           #
 # ========================================================= #
 
-source("R/external_functions.R")
 # install.packages(c("readxl", "flexclust", "cluster", "fpc", "PythonInR"))
+source("R/external_functions.R")
 
 
 
@@ -57,9 +57,11 @@ results0 = studyplan_finder(
 
 results0$kmeans # we choose three clusters for k-means
 
-hist(results0$mixture$clusters) # mixture-model expectation maximization converged to three main clusters
+plot(results0$kmeans)
 
-plot(results0$ward, labels = other_info$immyear) # ward also seems to be well defined with 3 clusters
+  hist(results0$mixture$clusters) # mixture-model expectation maximization converged to three main clusters
+
+plot(results0$ward, labels = FALSE, main = "") # ward also seems to be well defined with 3 clusters
 identify(results0$ward, mostFollowed) # click over a branch to see the most followed courses!
 
 
@@ -123,11 +125,16 @@ image(mixtprototypes[, c(3,2,1)], axes = FALSE, main = "Mixture-Model Prototypes
 abline(h = c(.25, .75), col = 0)
 text(x = .8, y = seq(0, 1, l = 3), labels = c("Sist. e Reti", "Intell. Art.", "Vecchio Ord."), col = "0")
 
-image(t(clusterdataf[results$kmedoids[[1]]$medoids,]), axes = FALSE, main = "K-medoids Medoids")
+image(t(clusterdataf[results$kmedoids[[1]]$medoids[c(2,1,3)], ]), axes = FALSE, main = "K-medoids Medoids")
 abline(h = c(.25, .75), col = 0)
 text(x = .8, y = seq(0, 1, l = 3), labels = c("Sist. e Reti", "Intell. Art.", "Vecchio Ord."), col = "0")
+par(mfrow = c(1,1))
 
 
+# jaccard similarity coefficient
+temp = clusterboot(datafexam, B = 500, clustermethod = kmeansCBI, krange = 3)
+plot(temp)
+rm(temp)
 
 
 #### COMPOSIZIONE DEI CLUSTER ####
@@ -209,3 +216,11 @@ mostFollowed_byclust(results2$kmeans[[2]]@cluster, percentage = .5, graph = F) #
 # Ward deindogram 
 plot(results2$ward, labels = FALSE)
 identify(results2$ward, FUN = mostFollowed)
+
+
+# evaluations
+# jaccard similarity coefficient
+temp = clusterboot(datafexam_reduced, B = 500, clustermethod = kmeansCBI, krange = 4)
+plot(temp) # we see that those are not so stable anymore!
+rm(temp)
+

@@ -62,9 +62,6 @@ for(i in results){
 temp = clusterboot(clusterdataf, clustermethod = kmeansCBI, krange = 3)
 plot(temp)
 temp = temp$result$partition
-
-mostFollowed_byclust(temp, .5)
-plot(silhouette(temp, distances))
 rm(temp)
 
 
