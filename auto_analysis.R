@@ -59,7 +59,7 @@ results0$kmeans # we choose three clusters for k-means
 
 plot(results0$kmeans)
 
-  hist(results0$mixture$clusters) # mixture-model expectation maximization converged to three main clusters
+hist(results0$mixture$clusters) # mixture-model expectation maximization converged to three main clusters
 
 plot(results0$ward, labels = FALSE, main = "") # ward also seems to be well defined with 3 clusters
 identify(results0$ward, mostFollowed) # click over a branch to see the most followed courses!
@@ -144,7 +144,7 @@ library(spatstat)
 plot(
   as.im(as.matrix(exam_frequencies$mixture), 
         W = owin(c(1,90), c(1,140))),
-  main = "Courses Frequencies Beetween Clusters")
+  main = "Courses Frequencies Between Clusters")
 abline(v = c(30.5, 60.5), col = "white", lwd = 2)
 
 
