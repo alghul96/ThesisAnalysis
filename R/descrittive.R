@@ -42,20 +42,23 @@ for(i in 1:nrow(laureati_voti)){
 
 
 ### MEAN FOR EACH STUDENT ###
-apply(datafmarks, 1, mean, na.rm = T)
+hist(apply(datafmarks, 1, mean, na.rm = T), breaks = 30-18, main = "Istogramma delle medie degli studenti", col = "lightblue", xlab = "Voto in trentesimi")
 
-
-### MEAN FOR EACH EXAM ####
-apply(datafmarks, 2, mean, na.rm = T)
-
+### STATS FOR EACH EXAM ####
+write.csv(cbind(
+  apply(datafmarks, 2, median, na.rm = T),
+  apply(datafmarks, 2, mean, na.rm = T),
+  apply(datafmarks, 2, sd, na.rm = T)), "riassunto.csv")
 
 summary(datafmarks)
 mean(datafmarks$`CALCOLATORI ELETTRONICI M`, na.rm = T)
 
 
 #### Histograms for major exams
+par(mfrow = c(2,2))
+hist(datafmarks$`GESTIONE DELL'INNOVAZIONE E DEI PROGETTI M`, breaks = 30-18, main = "Voti di Gestione dell'Innovazione e dei Progetti")
+hist(datafmarks$`FONDAMENTI DI INTELLIGENZA ARTIFICIALE M`, breaks = 30-18, main = "Voti di Fondamenti di Intelligenza Artificiale")
+hist(datafmarks$`SICUREZZA DELL'INFORMAZIONE M`, breaks = 30-18, main = "Sicurezza dell'Informazione")
+hist(datafmarks$`LINGUAGGI E MODELLI COMPUTAZIONALI M`, breaks = 30-18, main = "Linguaggi e Modelli Computazionali")
 
-hist(datafmarks$`CALCOLATORI ELETTRONICI M`, breaks = 30-18)
-hist(datafmarks$`FONDAMENTI DI INTELLIGENZA ARTIFICIALE M`, breaks = 30-18)
-hist(datafmarks$`SISTEMI DISTRIBUITI M`, breaks = 30-18)
-
+write.csv(datafmarks, "voti.csv")
