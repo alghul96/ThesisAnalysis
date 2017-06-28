@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(readxl)\nvoti = read_excel(\"data/laureati.xls\", sheet = \"descrittiva\") # import of the third recode\nvoti = as.data.frame(voti)\nhead(laureati)\n\ndim(voti)\n\n# adding marks to everyone\n\n#laureati_voti = laureati\nfor(i in 1:nrow(laureati)){\n  \n  for(k in 1:nrow(voti)){\n    \n    if((laureati$matricola[i] == voti$matricola[k]) &  (laureati$`Materia Esame (cod)`[i] == voti$`Materia Esame (cod)`[k]))\n      \n      laureati_voti[i, \"voto\"] = voti[k,\"voto\"]\n      \n      \n    \n  }\n  \n  print(i/nrow(laureati)*100)\n  \n}\n\n\n\n# creating an object with careers for everyone\n\n\ndatafmarks = data.frame(NULL) # initializing the dataframe\n\nfor(i in 1:nrow(laureati_voti)){\n  mat = laureati_voti[i, 1]\n  exam = laureati_voti[i, 3]\n  \n  datafmarks[mat, exam] = laureati_voti[i, 4]\n}\n\n#datafmarks[is.na(datafexam)] = 0 # filling the NULLs\n\n\n### MEAN FOR EACH STUDENT ###\napply(datafmarks, 1, mean, na.rm = T)\n\n\n### MEAN FOR EACH EXAM ####\napply(datafmarks, 2, mean, na.rm = T)\n\n\nsummary(datafmarks)\nmean(datafmarks$`CALCOLATORI ELETTRONICI M`, na.rm = T)\n\n\n#### Histograms for major exams\n\nhist(datafmarks$`CALCOLATORI ELETTRONICI M`, breaks = 30-18)\nhist(datafmarks$`FONDAMENTI DI INTELLIGENZA ARTIFICIALE M`, breaks = 30-18)\nhist(datafmarks$`SISTEMI DISTRIBUITI M`, breaks = 30-18)\n\n",
+    "created" : 1498641905344.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3519498812",
+    "id" : "DEC8A592",
+    "lastKnownWriteTime" : 1498646727,
+    "last_content_update" : 1498646727399,
+    "path" : "D:/Box Sync/#UNI/Materiale tesi/Analysis/ThesisAnalysis/R/descrittive.R",
+    "project_path" : "R/descrittive.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
