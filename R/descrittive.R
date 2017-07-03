@@ -62,3 +62,16 @@ hist(datafmarks$`SICUREZZA DELL'INFORMAZIONE M`, breaks = 30-18, main = "Sicurez
 hist(datafmarks$`LINGUAGGI E MODELLI COMPUTAZIONALI M`, breaks = 30-18, main = "Linguaggi e Modelli Computazionali")
 
 write.csv(datafmarks, "voti.csv")
+
+
+#### EXAMS PER SEMESTER ####
+
+frequency_comparison = data.frame(NULL)
+
+for(examA in colnames(datafexam_reduced)){
+  for(examB in colnames(datafexam_reduced)){
+   frequency_comparison[examA, examB] = sum((datafexam_reduced[, examA] == rep(1,281)) & (datafexam_reduced[, examB] == rep(1,281)))
+  }
+}
+
+write.csv(frequency_comparison, "Comparison_frequenze.csv")
