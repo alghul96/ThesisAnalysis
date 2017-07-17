@@ -119,15 +119,15 @@ round(comparison, 2)
 par(mfrow = c(3,1))
 image(round(t(results$kmeans@centers)), axes = FALSE, main = "K-means Centroids")
 abline(h = c(.25, .75), col = 0)
-text(x = .8, y = seq(0, 1, l = 3), labels = c("Sist. e Reti", "Intell. Art.", "Vecchio Ord."), col = "0")
+text(x = .8, y = seq(0, 1, l = 3), labels = c("Sist. e Reti", "Intell. Art.", "Vecchio Ord."), col = "0", cex = 1.2)
 
 image(mixtprototypes[, c(3,2,1)], axes = FALSE, main = "Mixture-Model Prototypes")
 abline(h = c(.25, .75), col = 0)
-text(x = .8, y = seq(0, 1, l = 3), labels = c("Sist. e Reti", "Intell. Art.", "Vecchio Ord."), col = "0")
+text(x = .8, y = seq(0, 1, l = 3), labels = c("Sist. e Reti", "Intell. Art.", "Vecchio Ord."), col = "0", cex = 1.2)
 
 image(t(clusterdataf[results$kmedoids[[1]]$medoids[c(2,1,3)], ]), axes = FALSE, main = "K-medoids Medoids")
 abline(h = c(.25, .75), col = 0)
-text(x = .8, y = seq(0, 1, l = 3), labels = c("Sist. e Reti", "Intell. Art.", "Vecchio Ord."), col = "0")
+text(x = .8, y = seq(0, 1, l = 3), labels = c("Sist. e Reti", "Intell. Art.", "Vecchio Ord."), col = "0", cex = 1.2)
 par(mfrow = c(1,1))
 
 
@@ -139,6 +139,8 @@ rm(temp)
 
 #### COMPOSIZIONE DEI CLUSTER ####
 
+plot(results$ward)
+
 library(spatstat)
 
 plot(
@@ -146,6 +148,7 @@ plot(
         W = owin(c(1,90), c(1,140))),
   main = "Courses Frequencies Between Clusters")
 abline(v = c(30.5, 60.5), col = "white", lwd = 2)
+text(x =  seq(12, 78, l = 3), y = 120, labels = c("Sist. e\n Reti", "Intell.\n Art.", "Vecchio\n Ord."), col = "0", cex = .8)
 
 
 # We see that the third cluster is made by people enrolled before 2012
